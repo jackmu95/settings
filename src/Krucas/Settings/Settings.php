@@ -94,6 +94,17 @@ class Settings implements Repository
     }
 
     /**
+     * Set repository instance.
+     *
+     * @param \Krucas\Settings\Contracts\Repository
+     * @return void
+     */
+    public function setRepository(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
      * Return wrapped repository instance.
      *
      * @return \Krucas\Settings\Contracts\Repository
