@@ -11,7 +11,7 @@ Persistent settings package for Laravel 5.
 * Driver support
 * Cache settings via laravel cache
 * Encrypt / Decrypt setting values
-* Fire events after action
+* Dispatch events after action
 * Override config values
 * Helper function
 * Settings by context
@@ -179,11 +179,11 @@ settings($key, $default, new Context(['user' => 1]));
 
 ### Events
 
-Events gets fired if this is not disabled via config (enabled by default).
+Events gets dispatched if this is not disabled via config (enabled by default).
 
 #### settings.checking: $key
 
-Fired before checking if value is present in repository.
+Dispatched before checking if value is present in repository.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -192,7 +192,7 @@ Fired before checking if value is present in repository.
 
 #### settings.has: $key
 
-Fired after checking if value is present in repository.
+Dispatched after checking if value is present in repository.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -202,7 +202,7 @@ Fired after checking if value is present in repository.
 
 #### settings.getting: $key
 
-Fired before retrieving value from repository.
+Dispatched before retrieving value from repository.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -212,7 +212,7 @@ Fired before retrieving value from repository.
 
 #### settings.get: $key
 
-Fired after retrieving value from repository.
+Dispatched after retrieving value from repository.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -223,7 +223,7 @@ Fired after retrieving value from repository.
 
 #### settings.setting: $key
 
-Fired before setting value to repository.
+Dispatched before setting value to repository.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -233,7 +233,7 @@ Fired before setting value to repository.
 
 #### settings.set: $key
 
-Fired after setting value to repository.
+Dispatched after setting value to repository.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ Fired after setting value to repository.
 
 #### settings.forgetting: $key
 
-Fired before forgetting value.
+Dispatched before forgetting value.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |
@@ -252,7 +252,7 @@ Fired before forgetting value.
 
 #### settings.forget: $key
 
-Fired after forgetting value.
+Dispatched after forgetting value.
 
 | Parameter | Type | Parameter description |
 | --- | --- | --- |

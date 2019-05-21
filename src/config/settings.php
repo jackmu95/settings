@@ -40,7 +40,7 @@ return [
     | Enable / Disable events
     |--------------------------------------------------------------------------
     |
-    | If it is enabled various settings related events will be fired.
+    | If it is enabled various settings related events will be dispatched.
     |
     */
     'events' => true,

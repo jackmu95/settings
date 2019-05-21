@@ -25,7 +25,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($settings->has('key'));
     }
 
-    public function testHasFiresEvents()
+    public function testHasDispatchEvents()
     {
         $context = new \Krucas\Settings\Context();
 
@@ -36,8 +36,8 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('has')->with('key_g')->andReturn(true);
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.checking: key', ['key', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.has: key', ['key', true, $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.checking: key', ['key', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.has: key', ['key', true, $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
 
@@ -57,7 +57,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('has')->with('key_g')->andReturn(true);
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
 
@@ -183,7 +183,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('value', $settings->get('key'));
     }
 
-    public function testGetFiresEvents()
+    public function testGetDispatchEvents()
     {
         $context = new \Krucas\Settings\Context();
 
@@ -194,8 +194,8 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('get')->once()->with('key_g', 'default')->andReturn('serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.getting: key', ['key', 'default', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.get: key', ['key', 'value', 'default', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.getting: key', ['key', 'default', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.get: key', ['key', 'value', 'default', $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('unserialize')->with('serialized')->andReturn('value');
@@ -216,7 +216,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('get')->once()->with('key_g', 'default')->andReturn('serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('unserialize')->with('serialized')->andReturn('value');
@@ -328,7 +328,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $settings->set('key', 'value');
     }
 
-    public function testSetFiresEvents()
+    public function testSetDispatchEvents()
     {
         $context = new \Krucas\Settings\Context();
 
@@ -339,8 +339,8 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('set')->once()->with('key_g', 'serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.setting: key', ['key', 'value', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.set: key', ['key', 'value', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.setting: key', ['key', 'value', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.set: key', ['key', 'value', $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('serialize')->with('value')->andReturn('serialized');
@@ -361,7 +361,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('set')->once()->with('key_g', 'serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('serialize')->with('value')->andReturn('serialized');
@@ -428,7 +428,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $settings->forget('key');
     }
 
-    public function testForgetFiresEvents()
+    public function testForgetDispatchEvents()
     {
         $context = new \Krucas\Settings\Context();
 
@@ -439,8 +439,8 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('forget')->once()->with('key_g');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.forgetting: key', ['key', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.forget: key', ['key', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.forgetting: key', ['key', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.forget: key', ['key', $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
 
@@ -460,7 +460,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
         $mock->shouldReceive('forget')->once()->with('key_g');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
 
